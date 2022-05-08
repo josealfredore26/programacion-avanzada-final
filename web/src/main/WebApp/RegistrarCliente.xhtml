@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="WEB-INF/template.xhtml">
+    <ui:define name="title">Registrar Cliente</ui:define>
+
+    <ui:define name="content">
+    <h:form>
+        <p:panelGrid columns="1" padding="5">
+            <h:panelGrid columns="2" cellpadding="5">
+
+                <p:outputLabel value="Cedula:" for="codigo_c"/>
+                <p:inputText id="codigo_c" value="#{registrarClienteBean.cedula}" required="true" />
+
+                <p:outputLabel value="Nombre:" for="nombre_c"/>
+                <p:inputText id="nombre_c" value="#{registrarClienteBean.nombre}" required="true"/>
+
+                <p:outputLabel value="Email:" for="email_c"/>
+                <p:inputText id="email_c" value="#{registrarClienteBean.email}" required="true"/>
+
+                <p:outputLabel value="Password:" for="password_c"/>
+                <p:inputText id="password_c" value="#{registrarClienteBean.password}" required="true"/>
+
+                <p:outputLabel value="Ciudad" for="ciudad_c"/>
+                <p:selectOneMenu id="ciudad_c" value="#{registrarClienteBean.ciudad}" converter="#{ciudadConverter}">
+                    <f:selectItem itemLabel="Seleccione la ciudad en la que vive" noSelectionOption="true"/>
+                    <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}"
+                                   value="#{registrarClienteBean.ciudades}"/>
+                </p:selectOneMenu>
+
+                    <p:outputLabel value="Numero de telefono:" for="numero_c"/>
+                    <p:inputText id="numero_c" value="#{registrarClienteBean.numero}"/>
+
+                    <p:commandButton value="Agregar Numero A Listado" action="#{registrarClienteBean.agregarNumeroDeTelefono}" update="@form"/>
+
+            </h:panelGrid>
+            <p:panelGrid columns="1" cellpadding="5">
+                <p:dataTable var="telefonos" value="#{registrarClienteBean.telefonos}">
+                    <p:column headerText="Telefonos" style="text-align: center">
+                        <h:outputText value="#{telefonos}" style="text-align: center"/>
+                    </p:column>
+                </p:dataTable>
+            </p:panelGrid>
+
+            <p:commandButton value="Registrar Cliente" action="#{registrarClienteBean.registrarCliente}" update="@form"/>
+        </p:panelGrid>
+    </h:form>
+</ui:define>
+</ui:composition>
+</html>

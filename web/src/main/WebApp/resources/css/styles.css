@@ -1,0 +1,22 @@
+#cajon{
+background: gray;
+}
+
+.imagen-producto{
+    max-width: 200px;
+}
+
+.item-pro{
+    margin-top:    10px;
+    margin-bottom: 10px;
+}
+
+#info-sesion{
+    position: relative;
+}
+
+#info-sesion > * {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+}

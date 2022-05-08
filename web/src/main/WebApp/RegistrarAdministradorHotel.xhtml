@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="WEB-INF/template.xhtml">
+    <ui:define name="title">Registrar Vuelo</ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+
+                <p:outputLabel value="Cedula:" for="Cedula_A"/>
+                <p:inputText id="Cedula_A" value="#{administradorHotelBean.cedula}" required="true"/>
+
+                <p:outputLabel value="Nombre:" for="Nombre_A"/>
+                <p:inputText id="Nombre_A" value="#{administradorHotelBean.nombre}" required="true"/>
+
+                <p:outputLabel value="Email:" for="Email_A"/>
+                <p:inputText id="Email_A" value="#{administradorHotelBean.email}" required="true"/>
+
+                <p:outputLabel value="Password:" for="Password_A"/>
+                <p:inputText id="Password_A" value="#{administradorHotelBean.password}" required="true"/>
+
+            </h:panelGrid>
+            <p:commandButton value="Registrar Administardor Hotel" action="#{administradorHotelBean.registrarAdministradorHotel}" update="@form"/>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

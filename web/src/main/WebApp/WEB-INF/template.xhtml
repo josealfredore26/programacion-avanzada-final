@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="styles.css"/>
+    <h:outputScript library="js" name="bootstrap.bundle.min.js"/>
+    <title>Unishop |  <ui:insert name="title">plantilla</ui:insert></title>
+</h:head>
+<h:body>
+
+
+    <div id="header">
+        <div class="px-3 py-2 bg-dark text-white">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/"
+                       class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                    </a>
+                    <span class="pi pi-shopping-cart" style="front-size:2rem;margin-right:2px"></span>
+                    <span class="fs-4">
+              <a href="index.xhtml" class="nav-link text-white"> UniTravel  </a></span>
+                    <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                        <li>
+                            <a href="/index.xhtml" class="nav-link text-white">
+                                <i class="pi pi-home bi d-block mx-auto mb-1 icon-menu" style="text-align: center"></i>
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="RegistarReserva.xhtml" class="nav-link text-white">
+                                <i class="pi pi-save bi d-block mx-auto mb-1 icon-menu" style="text-align: center"></i>
+                                Crear Reserva
+                            </a>
+                        </li>
+                        <li>
+                            <a href="AgregarCaracteristica.xhtml" class="nav-link text-white">
+                                <i class="pi pi-save bi d-block mx-auto mb-1 icon-menu" style="text-align: center"></i>
+                                Caracteristicas
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="RegistrarVuelos.xhtml" class="nav-link text-white">
+                                <i class="pi pi-globe bi d-block mx-auto mb-1 icon-menu" style="text-align: center"></i>
+                                Vuelos
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="px-3 py-2 border-bottom mb-3">
+            <div class="container d-flex flex-wrap justify-content-center">
+
+                <div class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
+                    <h:form>
+                        <p:inputText style="width: 300px" placeholder="Que desea Buscar?" required="true"
+                                     value="#{buscarProductoBean.busqueda}"/>
+                        <p:commandButton icon="pi pi-search" action="#{buscarProductoBean.buscar}" update="@form"/>
+                    </h:form>
+
+                </div>
+
+                <div class="text-end">
+                    <h:form rendered="#{!seguridadBean.autenticado}">
+                        <p:commandButton value="Login" styleClass="btn btn-primary me-2" onclick="PF('login').show()" icon="pi pi-sign-in" />
+                        <p:commandButton value="Registrase" styleClass="btn btn-primary"
+                                         action="RegistrarCliente.xhtml?faces-redirect=true" />
+                    </h:form>
+
+                    <div id="info-sesion" jsf:rendered="#{seguridadBean.autenticado}">
+                        <span>Usuario: #{ seguridadBean.clienteSesion.nombre}</span>
+                        <h:form>
+                            <p> </p>
+                            <p:commandButton value="Cerrar Sesion" styleClass="btn btn-primary"
+                                             action="#{seguridadBean.cerrarSesion}"/>
+                        </h:form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <p:dialog header="Iniciar sesión" showEffect="fade" widgetVar="login" modal="true" rendered="#{!seguridadBean.autenticado}">
+        <h:form >
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="email_login" value="Email:" />
+                <p:inputText id="email_login" value="#{seguridadBean.email}" required="true" />
+                <p:message for="email_login" />
+                <p:outputLabel for="password_login" value="Password:" />
+                <p:password id="password_login" value="#{seguridadBean.password}" required="true"
+                />
+                <p:message for="password_login" />
+            </h:panelGrid>
+            <p:commandButton value="Iniciar Sesión" action="#{seguridadBean.iniciarSesion}"
+                             styleClass="mt-4" update="@form" icon="pi pi-sign-in" iconPos="left" />
+            <p:growl for="login-bean" showDetail="true" />
+        </h:form>
+    </p:dialog>
+
+    <div id="content">
+
+        <div class ="container">
+            <ui:insert name="content">Contenido</ui:insert>
+        </div>
+    </div>
+
+    <div id="footer" class="footer mt-5">
+        <ui:insert name="footer">
+            <div class="py-4 bg-light" align="center">
+                <div class="justify-content-center" >
+                    <div class="col-10" >
+                        <span>Universidad del Quindío - Programación avanzada - 2022</span>
+                    </div>
+                </div>
+            </div>
+        </ui:insert>
+    </div>
+</h:body>
+</html>

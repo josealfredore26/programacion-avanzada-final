@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="WEB-INF/template.xhtml">
+    <ui:define name="title">Registrar Cliente</ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <p:panelGrid columns="1" padding="5">
+                <h:panelGrid columns="2" cellpadding="5">
+
+                    <p:outputLabel value="Cantidad_Cliente:" for="cantidad_R"/>
+                    <p:inputText id="cantidad_R" value="#{reservaBean.cantidad_cliente}" required="true" />
+
+                    <p:outputLabel value="FechaIncio:" for="fechaI_R"/>
+                    <p:datePicker id="fechaI_R" value="#{reservaBean.fecha_inicio}" required="true"/>
+
+                    <p:outputLabel value="FechaFinal:" for="fechaF_R"/>
+                    <p:datePicker id="fechaF_R" value="#{reservaBean.fecha_final}" required="true"/>
+
+                    <p:outputLabel value="Vuelo" for="vuelo_R"/>
+                    <p:selectOneMenu id="vuelo_R" value="#{reservaBean.vuelo}" converter="#{v}">
+                        <f:selectItem itemLabel="Seleccione la ciudad en la que vive" noSelectionOption="true"/>
+                        <f:selectItems var="vuelo" itemLabel="#{v}"
+                                       value="#{clienteBean.ciudades}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Silla" for="silla_r"/>
+                    <p:selectOneMenu id="silla_r" value="#{clienteBean.ciudad}" converter="#{ciudadConverter}">
+                        <f:selectItem itemLabel="Seleccione la ciudad en la que vive" noSelectionOption="true"/>
+                        <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}"
+                                       value="#{clienteBean.ciudades}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Habitacion" for="habitacion_r"/>
+                    <p:selectOneMenu id="habitacion_r" value="#{clienteBean.ciudad}" converter="#{ciudadConverter}">
+                        <f:selectItem itemLabel="Seleccione la ciudad en la que vive" noSelectionOption="true"/>
+                        <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}"
+                                       value="#{clienteBean.ciudades}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Cliente" for="cliente_r"/>
+                    <p:selectOneMenu id="cliente_r" value="#{clienteBean.ciudad}" converter="#{ciudadConverter}">
+                        <f:selectItem itemLabel="Seleccione la ciudad en la que vive" noSelectionOption="true"/>
+                        <f:selectItems var="ciudad" itemLabel="#{ciudad.nombre}"
+                                       value="#{clienteBean.ciudades}"/>
+                    </p:selectOneMenu>
+
+                </h:panelGrid>
+
+                <p:panelGrid columns="1" cellpadding="5">
+
+                    <p:dataTable var="telefonos" value="#{clienteBean.telefonos}">
+                        <p:column headerText="Telefonos" style="text-align: center">
+                            <h:outputText value="#{telefonos}" style="text-align: center"/>
+                        </p:column>
+                    </p:dataTable>
+
+                     <p:dataTable var="telefonos" value="#{clienteBean.telefonos}">
+                         <p:column headerText="Telefonos" style="text-align: center">
+                             <h:outputText value="#{telefonos}" style="text-align: center"/>
+                         </p:column>
+                     </p:dataTable>
+
+
+                    <p:dataTable var="telefonos" value="#{clienteBean.telefonos}">
+                          <p:column headerText="Telefonos" style="text-align: center">
+                              <h:outputText value="#{telefonos}" style="text-align: center"/>
+                          </p:column>
+                    </p:dataTable>
+
+                </p:panelGrid>
+
+
+                <p:commandButton value="Registrar Reserva" action="#{reservaBean.agregarReserva}" update="@form"/>
+
+            </p:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>
